@@ -97,7 +97,7 @@ def _run_screener(filter_strings: list[str], view_string: str):
             return
 
     filters = Filters()
-    for filter_string in filter_strings:
+    for filter_string in filter_strings or []:
         # read filters from user arguments
         filter_string_parts = filter_string.split(':')
         if len(filter_string_parts) != 2:
