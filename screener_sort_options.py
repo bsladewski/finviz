@@ -1,0 +1,239 @@
+from enum import Enum
+
+class SortOptions(object):
+    """
+    Provides sort options for interacting with the FinViz Screening site.
+    """
+
+    class Overview(str, Enum):
+        TICKER='ticker' # Ticker
+        TICKER_DESC='ticker_desc' # Ticker Descending
+        COMPANY='company' # Company
+        COMPANY_DESC='company_desc' # Company Descending
+        SECTOR='sector' # Sector
+        SECTOR_DESC='sector_desc' # Sector Descending
+        INDUSTRY='industry' # Industry
+        INDUSTRY_DESC='industry_desc' # Industry Descending
+        COUNTRY='country' # Country
+        COUNTRY_DESC='country_desc' # Country Descending
+        MARKET_CAP='marketcap' # Market Cap
+        MARKET_CAP_DESC='marketcap_desc' # Market Cap Descending
+        P_E='pe' # P/E
+        P_E_DESC='pe_desc' # P/E Descending
+        PRICE='price' # Price
+        PRICE_DESC='price_desc' # Price Descending
+        CHANGE='change' # Change
+        CHANGE_DESC='change_desc' # Change Descending
+        VOLUME='volume' # Volume
+        VOLUME_DESC='volume_desc' # Volume Descending
+
+    class Valuation(str, Enum):
+        TICKER='ticker' # Ticker
+        TICKER_DESC='ticker_desc' # Ticker Descending
+        MARKET_CAP='marketcap' # Market Cap
+        MARKET_CAP_DESC='marketcap_desc' # Market Cap Descending
+        P_E='pe' # P/E
+        P_E_DESC='pe_desc' # P/E Descending
+        FWD_P_E='forwardpe' # Fwd P/E
+        FWD_P_E_DESC='forwardpe_desc' # Fwd P/E Descending
+        PEG='peg' # PEG
+        PEG_DESC='peg_desc' # PEG Descending
+        P_S='ps' # P/S
+        P_S_DESC='ps_desc' # P/S Descending
+        P_B='pb' # P/B
+        P_B_DESC='pb_desc' # P/B Descending
+        P_C='pc' # P/C
+        P_C_DESC='pc_desc' # P/C Descending
+        P_FCF='pfcf' # P/FCF
+        P_FCF_DESC='pfcf_desc' # P/FCF Descending
+        EPS_THIS_Y='epsyoy' # EPS this Y
+        EPS_THIS_Y_DESC='epsyoy_desc' # EPS this Y Descending
+        EPS_NEXT_Y='epsyoy1' # EPS next Y
+        EPS_NEXT_Y_DESC='epsyoy1_desc' # EPS next Y Descending
+        EPS_PAST_FIVE_Y='eps5years' # EPS past 5Y
+        EPS_PAST_FIVE_Y_DESC='eps5years_desc' # EPS past 5Y Descending
+        EPS_NEXT_FIVE_Y='estltgrowth' # EPS next 5Y
+        EPS_NEXT_FIVE_Y_DESC='estltgrowth_desc' # EPS next 5Y Descending
+        SALES_PAST_FIVE_Y='sales5years' # Sales past 5Y
+        SALES_PAST_FIVE_Y_DESC='sales5years_desc' # Sales past 5Y Descending
+        PRICE='price' # Price
+        PRICE_DESC='price_desc' # Price Descending
+        CHANGE='change' # Change
+        CHANGE_DESC='change_desc' # Change Descending
+        VOLUME='volume' # Volume
+        VOLUME_DESC='volume_desc' # Volume Descending
+
+    class Financial(str, Enum):
+        TICKER='ticker' # Ticker
+        TICKER_DESC='ticker_desc' # Ticker Descending
+        MARKET_CAP='marketcap' # Market Cap
+        MARKET_CAP_DESC='marketcap_desc' # Market Cap Descending
+        DIVIDEND='dividendyield' # Dividend
+        DIVIDEND_DESC='dividendyield_desc' # Dividend Descending
+        ROA='roa' # ROA
+        ROA_DESC='roa_desc' # ROA Descending
+        ROE='roe' # ROE
+        ROE_DESC='roe_desc' # ROE Descending
+        ROIC='roi' # ROIC
+        ROIC_DESC='roi_desc' # ROIC Descending
+        CURR_R='curratio' # Curr R
+        CURR_R_DESC='curratio_desc' # Curr R Descending
+        QUICK_R='quickratio' # Quick R
+        QUICK_R_DESC='quickratio_desc' # Quick R Descending
+        LTDEBT_EQ='ltdebteq' # LTDebt/Eq
+        LTDEBT_EQ_DESC='ltdebteq_desc' # LTDebt/Eq Descending
+        DEBT_EQ='debteq' # Debt/Eq
+        DEBT_EQ_DESC='debteq_desc' # Debt/Eq Descending
+        GROSS_M='grossmargin' # Gross M
+        GROSS_M_DESC='grossmargin_desc' # Gross M Descending
+        OPER_M='opermargin' # Oper M
+        OPER_M_DESC='opermargin_desc' # Oper M Descending
+        PROFIT_M='netmargin' # Profit M
+        PROFIT_M_DESC='netmargin_desc' # Profit M Descending
+        EARNINGS='earningsdate' # Earnings
+        EARNINGS_DESC='earningsdate_desc' # Earnings Descending
+        PRICE='price' # Price
+        PRICE_DESC='price_desc' # Price Descending
+        CHANGE='change' # Change
+        CHANGE_DESC='change_desc' # Change Descending
+        VOLUME='volume' # Volume
+        VOLUME_DESC='volume_desc' # Volume Descending
+
+    class Ownership(str, Enum):
+        TICKER='ticker' # Ticker
+        TICKER_DESC='ticker_desc' # Ticker Descending
+        MARKET_CAP='marketcap' # Market Cap
+        MARKET_CAP_DESC='marketcap_desc' # Market Cap Descending
+        OUTSTANDING='sharesoutstanding2' # Outstanding
+        OUTSTANDING_DESC='sharesoutstanding2_desc' # Outstanding Descending
+        FLOAT='sharesfloat' # Float
+        FLOAT_DESC='sharesfloat_desc' # Float Descending
+        INSIDER_OWN='insiderown' # Insider Own
+        INSIDER_OWN_DESC='insiderown_desc' # Insider Own Descending
+        INSIDER_TRANS='insidertrans' # Insider Trans
+        INSIDER_TRANS_DESC='insidertrans_desc' # Insider Trans Descending
+        INST_OWN='instown' # Inst Own
+        INST_OWN_DESC='instown_desc' # Inst Own Descending
+        INST_TRANS='insttrans' # Inst Trans
+        INST_TRANS_DESC='insttrans_desc' # Inst Trans Descending
+        SHORT_FLOAT='shortinterestshare' # Short Float
+        SHORT_FLOAT_DESC='shortinterestshare_desc' # Short Float Descending
+        SHORT_RATIO='shortinterestratio' # Short Ratio
+        SHORT_RATIO_DESC='shortinterestratio_desc' # Short Ratio Descending
+        AVG_VOLUME='averagevolume' # Avg Volume
+        AVG_VOLUME_DESC='averagevolume_desc' # Avg Volume Descending
+        PRICE='price' # Price
+        PRICE_DESC='price_desc' # Price Descending
+        CHANGE='change' # Change
+        CHANGE_DESC='change_desc' # Change Descending
+        VOLUME='volume' # Volume
+        VOLUME_DESC='volume_desc' # Volume Descending
+
+    class Performance(str, Enum):
+        TICKER='ticker' # Ticker
+        TICKER_DESC='ticker_desc' # Ticker Descending
+        PERF_WEEK='perf1w' # Perf Week
+        PERF_WEEK_DESC='perf1w_desc' # Perf Week Descending
+        PERF_MONTH='perf4w' # Perf Month
+        PERF_MONTH_DESC='perf4w_desc' # Perf Month Descending
+        PERF_QUART='perf13w' # Perf Quart
+        PERF_QUART_DESC='perf13w_desc' # Perf Quart Descending
+        PERF_HALF='perf26w' # Perf Half
+        PERF_HALF_DESC='perf26w_desc' # Perf Half Descending
+        PERF_YEAR='perf52w' # Perf Year
+        PERF_YEAR_DESC='perf52w_desc' # Perf Year Descending
+        PERF_YTD='perfytd' # Perf YTD
+        PERF_YTD_DESC='perfytd_desc' # Perf YTD Descending
+        PERF_THREE_Y='perf3y' # Perf 3Y
+        PERF_THREE_Y_DESC='perf3y_desc' # Perf 3Y Descending
+        PERF_FIVE_Y='perf5y' # Perf 5Y
+        PERF_FIVE_Y_DESC='perf5y_desc' # Perf 5Y Descending
+        PERF_TEN_Y='perf10y' # Perf 10Y
+        PERF_TEN_Y_DESC='perf10y_desc' # Perf 10Y Descending
+        VOLATILITY_W='volatility1w' # Volatility W
+        VOLATILITY_W_DESC='volatility1w_desc' # Volatility W Descending
+        VOLATILITY_M='volatility4w' # Volatility M
+        VOLATILITY_M_DESC='volatility4w_desc' # Volatility M Descending
+        AVG_VOLUME='averagevolume' # Avg Volume
+        AVG_VOLUME_DESC='averagevolume_desc' # Avg Volume Descending
+        REL_VOLUME='relativevolume' # Rel Volume
+        REL_VOLUME_DESC='relativevolume_desc' # Rel Volume Descending
+        PRICE='price' # Price
+        PRICE_DESC='price_desc' # Price Descending
+        CHANGE='change' # Change
+        CHANGE_DESC='change_desc' # Change Descending
+        VOLUME='volume' # Volume
+        VOLUME_DESC='volume_desc' # Volume Descending
+
+    class Technical(str, Enum):
+        TICKER='ticker' # Ticker
+        TICKER_DESC='ticker_desc' # Ticker Descending
+        BETA='beta' # Beta
+        BETA_DESC='beta_desc' # Beta Descending
+        ATR='averagetruerange' # ATR
+        ATR_DESC='averagetruerange_desc' # ATR Descending
+        SMA_TWENTY='sma20' # SMA20
+        SMA_TWENTY_DESC='sma20_desc' # SMA20 Descending
+        SMA_FIFTY='sma50' # SMA50
+        SMA_FIFTY_DESC='sma50_desc' # SMA50 Descending
+        SMA_TWO_HUNDRED='sma200' # SMA200
+        SMA_TWO_HUNDRED_DESC='sma200_desc' # SMA200 Descending
+        FIFTY_TWO_W_HIGH='high52w' # 52W High
+        FIFTY_TWO_W_HIGH_DESC='high52w_desc' # 52W High Descending
+        FIFTY_TWO_W_LOW='low52w' # 52W Low
+        FIFTY_TWO_W_LOW_DESC='low52w_desc' # 52W Low Descending
+        RSI='rsi' # RSI
+        RSI_DESC='rsi_desc' # RSI Descending
+        PRICE='price' # Price
+        PRICE_DESC='price_desc' # Price Descending
+        CHANGE='change' # Change
+        CHANGE_DESC='change_desc' # Change Descending
+        CHANGE_FROM_OPEN='changeopen' # Change from Open
+        CHANGE_FROM_OPEN_DESC='changeopen_desc' # Change from Open Descending
+        GAP='gap' # Gap
+        GAP_DESC='gap_desc' # Gap Descending
+        VOLUME='volume' # Volume
+        VOLUME_DESC='volume_desc' # Volume Descending
+
+    class Etf(str, Enum):
+        TICKER='ticker' # Ticker
+        TICKER_DESC='ticker_desc' # Ticker Descending
+        COMPANY='company' # Company
+        COMPANY_DESC='company_desc' # Company Descending
+        SINGLE_CATEGORY='e.category' # Single Category
+        SINGLE_CATEGORY_DESC='e.category_desc' # Single Category Descending
+        TAGS='e.tags' # Tags
+        TAGS_DESC='e.tags_desc' # Tags Descending
+        DIVIDEND='dividendyield' # Dividend
+        DIVIDEND_DESC='dividendyield_desc' # Dividend Descending
+        PRICE='price' # Price
+        PRICE_DESC='price_desc' # Price Descending
+        CHANGE='change' # Change
+        CHANGE_DESC='change_desc' # Change Descending
+
+    class EtfPerformance(str, Enum):
+        TICKER='ticker' # Ticker
+        TICKER_DESC='ticker_desc' # Ticker Descending
+        HOLDINGS='e.totalholdings' # Holdings
+        HOLDINGS_DESC='e.totalholdings_desc' # Holdings Descending
+        AUM='e.assetsundermanagement' # AUM
+        AUM_DESC='e.assetsundermanagement_desc' # AUM Descending
+        FLOWS_PERCENT_ONE_M='e.netflows1monthpct' # Flows% 1M
+        FLOWS_PERCENT_ONE_M_DESC='e.netflows1monthpct_desc' # Flows% 1M Descending
+        FLOWS_PERCENT_THREE_M='e.netflows3monthpct' # Flows% 3M
+        FLOWS_PERCENT_THREE_M_DESC='e.netflows3monthpct_desc' # Flows% 3M Descending
+        FLOWS_PERCENT_YTD='e.netflowsytdpct' # Flows% YTD
+        FLOWS_PERCENT_YTD_DESC='e.netflowsytdpct_desc' # Flows% YTD Descending
+        RETURN_PERCENT_ONE_Y='e.return1year' # Return% 1Y
+        RETURN_PERCENT_ONE_Y_DESC='e.return1year_desc' # Return% 1Y Descending
+        RETURN_PERCENT_THREE_Y='e.return3year' # Return% 3Y
+        RETURN_PERCENT_THREE_Y_DESC='e.return3year_desc' # Return% 3Y Descending
+        RETURN_PERCENT_FIVE_Y='e.return5year' # Return% 5Y
+        RETURN_PERCENT_FIVE_Y_DESC='e.return5year_desc' # Return% 5Y Descending
+        EXPENSE='e.netexpenseratio' # Expense
+        EXPENSE_DESC='e.netexpenseratio_desc' # Expense Descending
+        PRICE='price' # Price
+        PRICE_DESC='price_desc' # Price Descending
+        CHANGE='change' # Change
+        CHANGE_DESC='change_desc' # Change Descending
+

@@ -9,6 +9,7 @@ from enum import Enum
 from io import StringIO
 from pandas import DataFrame
 from screener_filters import Filters
+from screener_sort_options import SortOptions
 from utils import Bcolors, text_to_pascal, pascal_to_snake
 
 
@@ -32,10 +33,18 @@ class Screener:
     """
 
     @classmethod
-    def _get_table(cls, filter: Filters | None=None, view: View=View.OVERVIEW) -> DataFrame:
+    def _format_sort_option(cls, sort: str) -> str:
+        return '-' + sort.replace('_desc', '') if sort.endswith('_desc') else sort
+
+    @classmethod
+    def _get_table(cls, filter: Filters | None=None, view: View=View.OVERVIEW, sort: str=None, offset: int=None) -> DataFrame:
         # fetch data from FinViz Screener
         params = filter.get_params() if filter is not None else {}
         params.update({'v': view})
+        if sort:
+            params.update({'o': cls._format_sort_option(sort)})
+        if offset:
+            params.update({'r': offset+1}) # add 1 as finviz is 1-indexed but usage for this tool will be 0-indexed
         response = requests.get(Config.SCREENER_BASE_URI, params=params, headers=Config.SCREENER_HEADERS)
         soup = BeautifulSoup(response.content, 'html.parser')
         table_soup = soup.find('table', class_='screener_table')
@@ -55,9 +64,9 @@ class Screener:
         return table[0]
 
     @classmethod
-    def get(cls, filter: Filters | None=None, view: View=View.OVERVIEW) -> DataFrame:
+    def get(cls, filter: Filters | None=None, view: View=View.OVERVIEW, sort: str=None, offset: int=0) -> DataFrame:
         """Scrapes the specified data from FinViz."""
-        return cls._get_table(filter, view)
+        return cls._get_table(filter, view, sort, offset)
 
 
 def _list_filters():
@@ -84,7 +93,13 @@ def _list_views():
         print(f'{Bcolors.HEADER}{view.lower()}{Bcolors.ENDC}')
 
 
-def _run_screener(filter_strings: list[str], view_string: str):
+def _list_sort_options(view_string: str):
+    """Prints all sort options for a given view."""
+    for option in getattr(SortOptions, text_to_pascal(view_string)).__members__.keys():
+        print(f'{Bcolors.HEADER}{option.lower()}{Bcolors.ENDC}')
+
+
+def _run_screener(filter_strings: list[str], view_string: str, sort_string: str, offset: int):
     """Prints the screening data for the supplied filters and view."""
     if not view_string:
         view = View.OVERVIEW.name
@@ -118,7 +133,12 @@ def _run_screener(filter_strings: list[str], view_string: str):
             print(f'{Bcolors.FAIL}Filter value "{filter_string_parts[1]}" not found for filter "{filter_string_parts[0]}".Use `python screener.py -lfv` or `python screener.py --list_filter_values` to see available filters values.{Bcolors.ENDC}')
             return
     # print the resulting table from the supplied filters and view
-    data = Screener.get(filters, view)
+    try:
+        data = Screener.get(filters, view, sort_string, offset)
+    except ValueError as e:
+        print(f'{Bcolors.FAIL}Failed to fetch data: {e}{Bcolors.ENDC}')
+        return
+
     print(data)
 
 
@@ -129,11 +149,17 @@ if __name__ == '__main__':
         usage='python screener.py -v financial -f industry:asset_management'
     )
 
+    # informational flags
     argument_parser.add_argument('-lf', '--list-filters', action='store_true', help='lists all available filters')
     argument_parser.add_argument('-lfv', '--list-filter-values', type=str, help='lists all available values for a specific filter')
     argument_parser.add_argument('-lv', '--list-views', action='store_true', help='lists all available views')
+    argument_parser.add_argument('-lso', '--list-sort-options')
+
+    # functional flags
     argument_parser.add_argument('-f', '--filters', nargs='*', help='applies filters to the result set')
     argument_parser.add_argument('-v', '--view', type=str, help='the tab within FinViz to pull data from')
+    argument_parser.add_argument('-s', '--sort', type=str, help='specifies how result data should be sorted')
+    argument_parser.add_argument('-o', '--offset', type=int, help='how many records to skip in the result data')
     args = argument_parser.parse_args()
 
     # handle -lf/--list-filters argument
@@ -151,5 +177,10 @@ if __name__ == '__main__':
         _list_views()
         quit()
 
+    # handle -lso/--list-sort-options argument
+    if args.list_sort_options:
+        _list_sort_options(args.list_sort_options)
+        quit()
+
     # handle command execution
-    _run_screener(args.filters, args.view)
+    _run_screener(args.filters, args.view, args.sort, args.offset)
